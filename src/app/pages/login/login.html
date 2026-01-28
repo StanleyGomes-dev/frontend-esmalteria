@@ -1,0 +1,16 @@
+<div class="login-container">
+  <div class="card-login">
+    <h2>Área Restrita 🔒</h2>
+    
+    <input type="text" placeholder="Usuário" [(ngModel)]="credenciais.usuario">
+    <input type="password" placeholder="Senha" [(ngModel)]="credenciais.senha">
+    
+    <button (click)="entrar()">Entrar</button>
+    
+    @if (mensagemErro) {
+      <p class="erro">{{ mensagemErro }}</p>
+    }
+    
+    <a routerLink="/" class="voltar">Voltar ao site</a>
+  </div>
+</div>

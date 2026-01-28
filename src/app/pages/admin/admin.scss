@@ -1,0 +1,155 @@
+/* --- CONFIGURAÇÃO GERAL DA PÁGINA --- */
+.admin-container {
+  min-height: 100vh;
+  background-color: #111; /* Fundo escuro */
+  color: #eee;
+  padding: 20px;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; /* Fonte mais limpa */
+}
+
+/* --- TOPO (TÍTULO E BOTÃO SAIR) --- */
+.header-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  max-width: 900px;
+  margin: 0 auto 30px auto;
+  
+  h1 { 
+    color: #d4af37; /* Dourado */
+    margin: 0; 
+    font-size: 1.8rem;
+  }
+}
+
+.btn-sair {
+  background-color: #330000;
+  color: #ff4444;
+  border: 1px solid #ff4444;
+  padding: 8px 20px;
+  border-radius: 5px;
+  cursor: pointer;
+  font-weight: bold;
+  transition: 0.2s;
+  
+  &:hover {
+    background-color: #ff4444;
+    color: white;
+  }
+}
+
+/* --- DASHBOARD (OS CARDS NOVOS) --- */
+.dashboard-cards {
+  display: grid;
+  grid-template-columns: 1fr 1fr; /* Dois cards lado a lado */
+  gap: 20px;
+  max-width: 900px;
+  margin: 0 auto 30px auto;
+
+  /* No celular, fica um embaixo do outro */
+  @media (max-width: 600px) {
+    grid-template-columns: 1fr; 
+  }
+
+  .card {
+    background: #222;
+    padding: 20px;
+    border-radius: 12px;
+    text-align: center;
+    border: 1px solid #333;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.5);
+
+    h3 { 
+      color: #888; 
+      font-size: 0.9rem; 
+      text-transform: uppercase; 
+      letter-spacing: 1px; 
+      margin-bottom: 10px; 
+    }
+    
+    .numero-grande {
+      font-size: 3rem;
+      font-weight: bold;
+      color: white;
+      margin: 0;
+    }
+
+    /* Estilo especial para o card do próximo cliente */
+    &.destaque-card {
+      border-color: #d4af37; 
+      background: linear-gradient(145deg, #222, #2a2510);
+      
+      .nome-proximo { 
+        font-size: 1.5rem; 
+        font-weight: bold; 
+        color: #d4af37; 
+        margin: 5px 0; 
+      }
+      .horario-proximo { color: #ccc; margin: 0; }
+      .vazio-info { color: #555; font-style: italic; }
+    }
+  }
+}
+
+/* --- TABELA --- */
+.tabela-container {
+  max-width: 900px;
+  margin: 0 auto;
+  overflow-x: auto; /* Permite rolar no celular */
+  background-color: #222;
+  border-radius: 12px;
+  padding: 10px;
+  border: 1px solid #333;
+}
+
+table { 
+  width: 100%; 
+  border-collapse: collapse; 
+}
+
+th, td { 
+  padding: 15px; 
+  text-align: left; 
+  border-bottom: 1px solid #333; 
+}
+
+th { color: #d4af37; font-weight: normal; text-transform: uppercase; font-size: 0.85rem; }
+
+.destaque { font-weight: bold; color: #fff; }
+.nome-cliente { font-weight: bold; }
+
+/* Botões da Tabela */
+.btn-zap { 
+  color: #25D366; 
+  text-decoration: none; 
+  font-weight: bold;
+  &:hover { text-decoration: underline; } 
+}
+
+.coluna-acoes { text-align: center; width: 80px; }
+
+.btn-lixeira { 
+  cursor: pointer; 
+  background: none; 
+  border: 1px solid #555; 
+  color: #888;
+  padding: 5px 10px; 
+  border-radius: 4px; 
+  font-size: 1.2rem; 
+  transition: 0.2s;
+
+  &:hover { 
+    background: #500; 
+    border-color: red; 
+    color: white;
+  } 
+}
+
+.btn-voltar {
+  display: block;
+  width: fit-content;
+  margin: 30px auto;
+  color: #666;
+  text-decoration: none;
+  &:hover { color: white; }
+}

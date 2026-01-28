@@ -1,0 +1,313 @@
+.agendamento-container {
+  min-height: 100vh;
+  background-color: #000;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 20px;
+}
+
+.card-form {
+  background-color: #1a1a1a;
+  padding: 30px;
+  border-radius: 15px;
+  width: 100%;
+  max-width: 500px;
+  border: 1px solid #333;
+  color: white;
+
+  h2 {
+    color: #d4af37;
+    text-align: center;
+    margin-bottom: 25px;
+  }
+
+  .campo {
+    margin-bottom: 20px;
+
+    label {
+      display: block;
+      margin-bottom: 8px;
+      font-weight: bold;
+      color: #ccc;
+    }
+
+    select, input {
+      width: 100%;
+      padding: 12px;
+      background-color: #333;
+      border: 1px solid #444;
+      border-radius: 5px;
+      color: white;
+      font-size: 1rem;
+      box-sizing: border-box; /* Garante que não estoure a largura */
+
+      &:focus {
+        outline: none;
+        border-color: #d4af37;
+      }
+    }
+  }
+
+  /* Grid dos botões de horário */
+  .grid-horarios {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr); /* 4 colunas */
+    gap: 10px;
+
+    .btn-hora {
+      padding: 10px;
+      background-color: #333;
+      border: 1px solid #444;
+      color: white;
+      border-radius: 5px;
+      cursor: pointer;
+      transition: all 0.2s;
+
+      &:hover {
+        background-color: #444;
+      }
+
+      &.ativo {
+        background-color: #d4af37;
+        color: black;
+        font-weight: bold;
+        border-color: #d4af37;
+      }
+    }
+  }
+
+  .btn-confirmar {
+    width: 100%;
+    padding: 15px;
+    background-color: #d4af37;
+    color: black;
+    border: none;
+    border-radius: 50px;
+    font-size: 1.1rem;
+    font-weight: bold;
+    cursor: pointer;
+    margin-top: 20px;
+
+    &:hover {
+      background-color: white;
+    }
+  }
+
+  .aviso {
+    text-align: center;
+    color: #ffcc00;
+    margin-top: 10px;
+  }
+  
+  /* Container dos botões (para alinhar um embaixo do outro e dar espaço) */
+.acoes-form {
+  display: flex;
+  flex-direction: column; /* Coloca um embaixo do outro */
+  gap: 15px; /* Espaço entre eles */
+  margin-top: 25px;
+}
+
+/* O Botão Principal (Dourado) */
+.btn-confirmar {
+  width: 100%;
+  padding: 15px;
+  font-size: 1.1rem;
+  font-weight: bold;
+  background-color: #d4af37; /* Dourado */
+  color: #000;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: transform 0.2s;
+
+  &:hover {
+    background-color: #fff;
+    transform: scale(1.02);
+  }
+}
+
+/* O Botão Secundário (Voltar - Transparente com borda) */
+.btn-voltar {
+  display: block; /* Faz o link se comportar como um bloco/botão */
+  text-align: center;
+  width: 100%;
+  padding: 12px;
+  font-size: 1rem;
+  color: #888; /* Texto cinza */
+  text-decoration: none; /* Tira o sublinhado */
+  border: 1px solid #444; /* Borda discreta */
+  border-radius: 8px;
+  background: transparent;
+  transition: all 0.3s;
+  box-sizing: border-box;
+
+  &:hover {
+    border-color: #d4af37; /* Borda dourada ao passar mouse */
+    color: #d4af37;
+  }
+}
+  
+}
+/* ... estilos anteriores ... */
+
+@keyframes descer {
+  from { top: -100px; opacity: 0; } /* Começa escondido lá em cima */
+  to { top: 20px; opacity: 1; }     /* Desce para a posição final */
+}
+/* --- MODAL (OVERLAY) --- */
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.85); /* Fundo bem escuro */
+  z-index: 2000;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 20px;
+  backdrop-filter: blur(5px); /* Desfoque chique no fundo */
+}
+
+/* --- CARD DO COMPROVANTE --- */
+.modal-card {
+  background: #1a1a1a;
+  width: 100%;
+  max-width: 400px;
+  border-radius: 15px;
+  padding: 30px;
+  text-align: center;
+  border: 1px solid #d4af37;
+  box-shadow: 0 0 20px rgba(212, 175, 55, 0.2);
+  animation: subir 0.4s ease-out;
+
+  .check-icone {
+    font-size: 3rem;
+    margin-bottom: 10px;
+  }
+
+  h2 {
+    color: #d4af37;
+    margin: 10px 0;
+  }
+
+  .subtitulo {
+    color: #ccc;
+    font-size: 0.9rem;
+    margin-bottom: 25px;
+  }
+}
+
+/* --- LISTA DE DETALHES --- */
+.detalhes-comprovante {
+  background-color: #222;
+  border-radius: 10px;
+  padding: 15px;
+  margin-bottom: 20px;
+  border: 1px dashed #444; /* Borda pontilhada estilo cupom */
+
+  .linha {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 10px;
+    border-bottom: 1px solid #333;
+    padding-bottom: 5px;
+    color: #eee;
+
+    &:last-child {
+      border-bottom: none;
+      margin-bottom: 0;
+    }
+
+    span { color: #888; }
+    strong { color: #fff; }
+  }
+}
+
+.aviso-pagamento {
+  font-size: 0.8rem;
+  color: #666;
+  margin-bottom: 20px;
+}
+
+.btn-voltar-home {
+  width: 100%;
+  padding: 12px;
+  background-color: #d4af37;
+  border: none;
+  border-radius: 8px;
+  font-weight: bold;
+  cursor: pointer;
+  font-size: 1rem;
+  
+  &:hover { background-color: #fff; }
+}
+
+@keyframes subir {
+  from { transform: translateY(50px); opacity: 0; }
+  to { transform: translateY(0); opacity: 1; }
+}
+
+/* Fundo escuro transparente */
+.modal-overlay {
+  position: fixed;
+  top: 0; left: 0;
+  width: 100%; height: 100%;
+  background-color: rgba(0,0,0,0.85); /* Escuro */
+  backdrop-filter: blur(5px); /* Desfoque */
+  z-index: 9999;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+/* O Cartão do Recibo */
+.modal-card {
+  background: #1a1a1a;
+  padding: 30px;
+  border-radius: 15px;
+  border: 1px solid #d4af37; /* Borda Dourada */
+  text-align: center;
+  width: 90%;
+  max-width: 400px;
+  
+  h2 { color: #d4af37; margin: 10px 0; }
+  .icone-sucesso { font-size: 3rem; }
+  .subtitulo { color: #ccc; margin-bottom: 20px; }
+}
+
+/* Lista de detalhes */
+.recibo-detalhes {
+  background: #252525;
+  padding: 15px;
+  border-radius: 10px;
+  margin-bottom: 20px;
+  text-align: left;
+  border: 1px dashed #555;
+
+  .linha {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 8px;
+    border-bottom: 1px solid #333;
+    padding-bottom: 5px;
+    color: white;
+    
+    span { color: #888; }
+  }
+}
+
+.aviso-pagamento { color: #666; font-size: 0.8rem; margin-bottom: 20px; font-style: italic; }
+
+.btn-inicio {
+  width: 100%;
+  padding: 12px;
+  background: #d4af37;
+  border: none;
+  border-radius: 8px;
+  font-weight: bold;
+  cursor: pointer;
+  &:hover { background: white; }
+}

@@ -1,0 +1,97 @@
+@if (mostrarModal) {
+  <div class="modal-overlay">
+    <div class="modal-card">
+      
+      <div class="icone-sucesso">✨💅</div>
+      
+      <h2>Agendamento Confirmado!</h2>
+      <p class="subtitulo">Obrigado, {{ agendamentoFinal.cliente }}!</p>
+
+      <div class="recibo-detalhes">
+        <div class="linha">
+          <span>🗓️ Data:</span>
+          <strong>{{ agendamentoFinal.data | date:'dd/MM/yyyy' : 'UTC' }}</strong>
+        </div>
+        <div class="linha">
+          <span>⏰ Horário:</span>
+          <strong>{{ agendamentoFinal.horario }}</strong>
+        </div>
+        <div class="linha">
+          <span>💅 Serviço:</span>
+          <strong>{{ agendamentoFinal.servico_id }}</strong>
+        </div>
+        <div class="linha">
+          <span>📱 WhatsApp:</span>
+          <strong>{{ agendamentoFinal.whatsapp }}</strong>
+        </div>
+      </div>
+
+      <p class="aviso-pagamento">ℹ️ Pagamento do sinal em breve.</p>
+
+      <button (click)="fecharModal()" class="btn-inicio">
+        Voltar ao Início 🏠
+      </button>
+
+    </div>
+  </div>
+}
+<div class="agendamento-container">
+  <div class="card-form">
+    <h2>Agendar Horário</h2>
+
+    <div class="campo">
+      <label>Qual procedimento?</label>
+      <select [(ngModel)]="selecionado.servico">
+        <option value="" disabled selected>Selecione...</option>
+        @for (item of servicos(); track item.id) {
+          <option [value]="item.nome">{{ item.nome }} - R$ {{ item.preco }}</option>
+        }
+      </select>
+    </div>
+
+    <div class="campo">
+      <label>Qual dia?</label>
+      <input type="date" [(ngModel)]="selecionado.data" (change)="buscarHorarios()">
+    </div>
+
+    @if (horariosDisponiveis().length > 0) {
+      <div class="campo">
+        <label>Horários Livres:</label>
+        <div class="grid-horarios">
+          @for (hora of horariosDisponiveis(); track hora) {
+            <button 
+              type="button" 
+              class="btn-hora" 
+              [class.ativo]="selecionado.horario === hora"
+              (click)="selecionado.horario = hora">
+              {{ hora }}
+            </button>
+          }
+        </div>
+      </div>
+    }
+
+    <div class="campo">
+      <label>Seu Nome:</label>
+      <input type="text" [(ngModel)]="selecionado.cliente" placeholder="Digite seu nome">
+    </div>
+
+    <div class="campo">
+      <label>WhatsApp:</label>
+      <input type="tel" [(ngModel)]="selecionado.whatsapp" placeholder="(11) 99999-9999">
+    </div>
+
+    @if (mensagem) {
+      <p class="aviso">{{ mensagem }}</p>
+    }
+
+    <div class="acoes-form">
+      <button type="button" class="btn-confirmar" (click)="confirmar()">
+  Confirmar Agendamento ✅
+      </button>
+
+      <a routerLink="/" class="btn-voltar">
+        Cancelar e Voltar
+      </a>
+    </div>
+</div>

@@ -1,0 +1,65 @@
+<div class="admin-container">
+  
+  <div class="header-top">
+    <h1>Painel da Manicure 💅</h1>
+    <button (click)="sair()" class="btn-sair">Sair 🔒</button>
+  </div>
+
+  <div class="dashboard-cards">
+    <div class="card">
+      <h3>Total Agendado</h3>
+      <p class="numero-grande">{{ totalAgendamentos() }}</p>
+    </div>
+
+    <div class="card destaque-card">
+      <h3>Próximo Cliente &uarr;</h3>
+      @if (proximoCliente(); as proximo) {
+        <p class="nome-proximo">{{ proximo.cliente }}</p>
+        <p class="horario-proximo">{{ proximo.data }} às {{ proximo.horario }}</p>
+      } @else {
+        <p class="vazio-info">Ninguém na fila</p>
+      }
+    </div>
+  </div>
+  
+  <div class="tabela-container">
+    <table>
+      <thead>
+        <tr>
+          <th>Data</th>
+          <th>Horário</th>
+          <th>Cliente</th>
+          <th>WhatsApp</th>
+          <th>Serviço</th>
+          <th class="coluna-acoes">Ações</th>
+        </tr>
+      </thead>
+      <tbody>
+        @for (item of listaAgendamentos(); track $index) {
+          <tr>
+            <td>{{ item.data }}</td>
+            <td class="destaque">{{ item.horario }}</td>
+            <td class="nome-cliente">{{ item.cliente }}</td>
+            <td>
+              <a href="https://wa.me/55{{ item.whatsapp }}" target="_blank" class="btn-zap">
+                {{ item.whatsapp }} 🔗
+              </a>
+            </td>
+            <td>{{ item.servico_id }}</td>
+            <td class="coluna-acoes">
+              <button (click)="excluir(item.id)" class="btn-lixeira" title="Cancelar">
+                🗑️
+              </button>
+            </td>
+          </tr>
+        } @empty {
+          <tr>
+            <td colspan="6" class="vazio">Nenhum agendamento ainda...</td>
+          </tr>
+        }
+      </tbody>
+    </table>
+  </div>
+  
+  <a routerLink="/" class="btn-voltar">⬅ Voltar para o Site</a>
+</div>
